@@ -26,8 +26,10 @@ Marketplace.create_user(%{first_name: "Foo", last_name: "Bar", email: "foo@bar.c
 Marketplace.insurance_credit(%{member_id: 1, amount: 100})
 ```
 
-* Requesting a visit. Visits are pending untill accepted or declined.
-* Requesting a visit will take pending minutes into account before allowing it to be created: current_balance > pending_minutes + requested_amount
+* Requesting a visit.
+* Visits are pending until accepted or declined.
+* Requesting a visit will take pending minutes into account before allowing it to be created:
+* current_balance > pending_minutes + requested_amount
 ```elixir
 Marketplace.request_visit(%{ member_id: 1, pal_id: 2, minutes: 10, tasks: "Conversation", visit_date: ~D[2022-02-17] })
 ```
