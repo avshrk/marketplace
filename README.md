@@ -34,15 +34,17 @@ Marketplace.insurance_credit(%{member_id: 1, amount: 100})
 Marketplace.request_visit(%{ member_id: 1, pal_id: 2, minutes: 10, tasks: "Conversation", visit_date: ~D[2022-02-17] })
 ```
 
-* Accepting a request. Once a request is accepted or declined, it is completed.
-* Accepting a request  completes the request by setting `accepted_at` field, credits pal (minus overhead), and debits member as a transaction.
+* Accepting a request.
+* Once a request is accepted or declined, it is completed.
+* Once a visit completed, modification will not be allowed
+* Accepting a request completes the request by setting `accepted_at` field, credits pal (minus overhead), and debits member.
 * Overhead is not being tracked - only user balances are being tracked.
 ```elixir
 Marketplace.accept_request(visit_id)
 ```
 
-* Declining a request completes the visit by setting `declined_at` field.
-* Once a visit completed, modification will not be allowed
+* Declining a request.
+* (sets  `declined_at`)
 ```elixir
 Marketplace.decline_request(visit_id)
 ```
@@ -68,7 +70,7 @@ Marketplace.pending_requests_for_pal(pal_id)
 ```elixir
 Marketplace.current_available_balance(member_id)
 ```
-* This the balance after having requests completed - persisted in transactions table.
+* This is the balance persisted in transactions table.
 ```elixir
 Marketplace.current_balance(member_id)
 ```

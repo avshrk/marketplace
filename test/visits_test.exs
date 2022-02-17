@@ -206,7 +206,7 @@ defmodule Marketplace.VisitsTest do
     assert error_message == "Completed visit can not be updated. Visit id: #{request.id}"
   end
 
-  test "retrieves all request made by a member", %{
+  test "retrieves all requests made by a member", %{
     member: member,
     member2: member2,
     pal: pal
@@ -267,7 +267,7 @@ defmodule Marketplace.VisitsTest do
              |> Enum.map(fn req -> req.id end)
   end
 
-  test "retrieves all pending member's request", %{
+  test "retrieves all pending member's requests", %{
     member: member,
     member2: member2,
     pal: pal
@@ -321,7 +321,7 @@ defmodule Marketplace.VisitsTest do
     assert v2.tasks == req.tasks
   end
 
-  test "retrieves all request for pal", %{
+  test "retrieves all requests for pal", %{
     member: member,
     member2: member2,
     pal: pal,
@@ -392,7 +392,7 @@ defmodule Marketplace.VisitsTest do
              |> Enum.map(fn req -> req.id end)
   end
 
-  test "retrieves all pending request for pal", %{
+  test "retrieves all pending requests for pal", %{
     member: member,
     member2: member2,
     pal: pal,
