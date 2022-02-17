@@ -18,12 +18,18 @@
 
 * Creating a user - email needs to be unique
 ```elixir
-Marketplace.create_user(%{first_name: "Foo", last_name: "Bar", email: "foo@bar.com"})
+%{
+  first_name: "Foo",
+  last_name: "Bar",
+  email: "foo@bar.com"
+}
+|> Marketplace.create_user()
 ```
 
 * Depositing intial funds - insurance deposit
 ```elixir
-Marketplace.insurance_credit(%{member_id: 1, amount: 100})
+%{member_id: 1, amount: 100}
+|> Marketplace.insurance_credit()
 ```
 
 * Requesting a visit.
@@ -31,7 +37,14 @@ Marketplace.insurance_credit(%{member_id: 1, amount: 100})
 * Requesting a visit will take pending minutes into account before allowing it to be created:
 * current_balance > pending_minutes + requested_amount
 ```elixir
-Marketplace.request_visit(%{ member_id: 1, pal_id: 2, minutes: 10, tasks: "Conversation", visit_date: ~D[2022-02-17] })
+%{
+  member_id: 1,
+  pal_id: 2,
+  minutes: 10,
+  tasks: "Conversation",
+  visit_date: ~D[2022-02-17]
+}
+|> Marketplace.request_visit()
 ```
 
 * Accepting a request.
@@ -40,42 +53,49 @@ Marketplace.request_visit(%{ member_id: 1, pal_id: 2, minutes: 10, tasks: "Conve
 * Accepting a request completes the request by setting `accepted_at` field, credits pal (minus overhead), and debits member.
 * Overhead is not being tracked - only user balances are being tracked.
 ```elixir
-Marketplace.accept_request(visit_id)
+visit_id
+|> Marketplace.accept_request()
 ```
 
 * Declining a request.
 * (sets  `declined_at`)
 ```elixir
-Marketplace.decline_request(visit_id)
+visit_id
+|> Marketplace.decline_request()
 ```
 
 * Getting all requests made by a member.
 ```elixir
-Marketplace.all_request_by_member(member_id)
+member_id
+|> Marketplace.all_request_by_member()
 ```
 
 * Getting all visits requested from a pal.
 ```elixir
-Marketplace.all_requests_for_pal(pal_id)
+pal_id
+|> Marketplace.all_requests_for_pal()
 ```
 * Getting all pending requests made by a member.
 ```elixir
-Marketplace.pending_requests_by_member(member_id)
+member_id
+|> Marketplace.pending_requests_by_member()
 ```
 * Getting all pending visits requested from a pal.
 ```elixir
-Marketplace.pending_requests_for_pal(pal_id)
+pal_id
+|> Marketplace.pending_requests_for_pal()
 ```
 * This takes into account pending visits: current_balance - pending_requests
 ```elixir
-Marketplace.current_available_balance(member_id)
+member_id
+|> Marketplace.current_available_balance()
 ```
 * This is the balance persisted in transactions table.
 ```elixir
-Marketplace.current_balance(member_id)
+member_id
+|> Marketplace.current_balance()
 ```
 
 
 ### Assumptions
 * Authentication and Authorization are excluded
-
