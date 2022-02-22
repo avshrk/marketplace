@@ -38,7 +38,7 @@ defmodule Marketplace.Visits do
     member_id
     |> enough_minutes_available?(minutes)
     |> case do
-      true -> params |> insert() |> IO.inspect()
+      true -> params |> insert()
       _ -> {:error, "Not enought minutes"}
     end
   end
